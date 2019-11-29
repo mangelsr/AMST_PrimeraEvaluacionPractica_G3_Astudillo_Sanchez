@@ -17,7 +17,7 @@
         app:srcCompat="@drawable/elsa" />
 
     <TextView
-        android:id="@+id/etQuestion"
+        android:id="@+id/tvQuestion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -33,10 +33,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:onClick="checkAnswer"
         android:text="Respuesta 1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etQuestion" />
+        app:layout_constraintTop_toBottomOf="@+id/tvQuestion" />
 
     <Button
         android:id="@+id/btnA2"
@@ -44,6 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Respuesta 2"
+        android:onClick="checkAnswer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnA1" />
@@ -54,6 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Respuesta 3"
+        android:onClick="checkAnswer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnA2" />
@@ -64,6 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Respuesta 4"
+        android:onClick="checkAnswer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnA3" />
