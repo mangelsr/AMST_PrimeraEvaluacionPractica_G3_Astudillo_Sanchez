@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -16,9 +17,9 @@ import amst.g1.amst_primeraevaluacion_g3_astudillo_sanchez.models.Question;
 
 public class MainActivity extends AppCompatActivity {
 
+    LinearLayout answerContainer;
     TextView tvQuestion;
-    Button btnA1, btnA2, btnA3, btnA4;
-    int c = 1;
+    int c = 0;
 
     Question actualQuestion;
 
@@ -32,14 +33,10 @@ public class MainActivity extends AppCompatActivity {
 
         buildDB();
 
+        answerContainer = findViewById(R.id.answerContainer);
         tvQuestion = findViewById(R.id.tvQuestion);
-        btnA1 = findViewById(R.id.btnA1);
-        btnA2 = findViewById(R.id.btnA2);
-        btnA3 = findViewById(R.id.btnA3);
-        btnA4 = findViewById(R.id.btnA4);
 
         selectNextQuestion();
-
     }
 
     private void selectNextQuestion() {
@@ -48,22 +45,26 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         } else {
+            answerContainer.removeAllViews();
+
             int radomIndex = random.nextInt(questions.size());
             actualQuestion = new Question(questions.get(radomIndex));
             questions.remove(radomIndex);
 
             tvQuestion.setText(actualQuestion.getQuestion());
-            btnA1.setText(actualQuestion.getAnswerList().get(0).getAnswer());
-            btnA1.setTag(actualQuestion.getAnswerList().get(0).isCorrect());
 
-            btnA2.setText(actualQuestion.getAnswerList().get(1).getAnswer());
-            btnA2.setTag(actualQuestion.getAnswerList().get(1).isCorrect());
-
-            btnA3.setText(actualQuestion.getAnswerList().get(2).getAnswer());
-            btnA3.setTag(actualQuestion.getAnswerList().get(2).isCorrect());
-
-            btnA4.setText(actualQuestion.getAnswerList().get(3).getAnswer());
-            btnA4.setTag(actualQuestion.getAnswerList().get(3).isCorrect());
+            for (Answer answer: actualQuestion.getAnswerList()) {
+                Button btn = new Button(getApplicationContext());
+                btn.setText(answer.getAnswer());
+                btn.setTag(answer.isCorrect());
+                btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        checkAnswer(view);
+                    }
+                });
+                answerContainer.addView(btn);
+            }
         }
     }
 
@@ -111,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
             c++;
         } else {
             Intent intent = new Intent(getApplicationContext(), LoseActivity.class);
+            intent.setAction(String.valueOf(c));
             startActivity(intent);
             finish();
         }

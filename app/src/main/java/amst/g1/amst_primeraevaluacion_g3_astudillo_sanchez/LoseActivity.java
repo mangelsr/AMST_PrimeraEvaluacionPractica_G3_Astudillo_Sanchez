@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class LoseActivity extends AppCompatActivity {
 
+    TextView tvMessage;
     Button btnExit, btnAgain;
 
     @Override
@@ -33,6 +35,9 @@ public class LoseActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        tvMessage = findViewById(R.id.tvCounter);
+        tvMessage.setText("Has respondido " + getIntent().getAction() + " preguntas");
     }
 
 
